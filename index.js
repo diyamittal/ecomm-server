@@ -13,7 +13,13 @@ const jwtKey = 'e-comm';
 const verifyToken = require('./middleware/auth')
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+    {
+        origin: ["https://ecomm-website-dun.vercel.app/"],
+        methods: ["POST", "GET", "DELETE"],
+        credentials: true
+    }
+));
 
 app.post("/register", async(req, res)=>{
 
