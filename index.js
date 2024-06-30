@@ -10,12 +10,14 @@ const paymentController = require('./controllers/paymentController.js')
 const Jwt = require('jsonwebtoken');
 const jwtKey = 'e-comm';
 
+const port = process.env.PORT || 5000;
+
 const verifyToken = require('./middleware/auth')
 
 app.use(express.json());
 app.use(cors(
     {
-        origin: ["https://ecomm-website-dun.vercel.app/"],
+        origin: ["https://ecomm-website-dun.vercel.app"],
         methods: ["POST", "GET", "DELETE"],
         credentials: true
     }
@@ -104,4 +106,4 @@ app.delete("/products/:id", verifyToken, async (req, res)=>{
     }
 })
 
-app.listen(5000);
+app.listen(port);
