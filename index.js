@@ -14,14 +14,13 @@ const port = process.env.PORT || 5000;
 
 const verifyToken = require('./middleware/auth')
 
-mongoose.connect("mongodb://127.0.0.1:27017/e-comm");
+mongoose.connect("mongodb://127.0.0.1:27017/e-comm", { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(express.json());
 app.use(cors(
     {
         origin: "*",
         methods: ["POST", "GET", "DELETE"],
-        credentials: true,
         allowedHeaders: ['Content-Type', 'Authorization']
     }
 ));
