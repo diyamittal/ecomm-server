@@ -6,7 +6,7 @@ const Product = require('./db/Product')
 const Location = require('./db/Location')
 const app= express();
 const paymentController = require('./controllers/paymentController.js')
-
+const mongoose = require('mongoose');
 const Jwt = require('jsonwebtoken');
 const jwtKey = 'e-comm';
 
@@ -14,14 +14,19 @@ const port = process.env.PORT || 5000;
 
 const verifyToken = require('./middleware/auth')
 
+mongoose.connect("mongodb://127.0.0.1:27017/e-comm");
+
 app.use(express.json());
 app.use(cors(
     {
-        origin: ["https://ecomm-website-dun.vercel.app"],
+        origin: "*",
         methods: ["POST", "GET", "DELETE"],
-        credentials: true
+        credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization']
     }
 ));
+
+app.options('*', cors());
 
 app.post("/register", async(req, res)=>{
 
